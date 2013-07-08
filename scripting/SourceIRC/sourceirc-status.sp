@@ -70,7 +70,7 @@ public Action:Command_GameInfo(const String:nick[], args) {
 }
 
 public Action:Command_Players(const String:nick[], args) {
-	IRC_ReplyToChannel(nick, "Total Players: %d", GetClientCount());
+	IRC_ReplyToCommand(nick, "Total Players: %d", GetClientCount());
 
 	for(new i = GetTeamCount() - 1; i >= 0; i--) {
 		new color = IRC_GetTeamColor(i);
@@ -85,9 +85,8 @@ public Action:Command_Players(const String:nick[], args) {
 		}
 			
 		for (new j = 1; j <= GetMaxClients(); j++) {
-			if(!IsClientInGame(j) || GetClientTeam(j) != i)
+			if(IsFakeClient(j) || !IsClientInGame(j) || GetClientTeam(j) != i)
 				continue;
-
 				
 			GetClientName(j, sName, sizeof(sName));
 
