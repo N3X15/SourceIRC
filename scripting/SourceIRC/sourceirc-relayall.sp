@@ -96,6 +96,7 @@ public Action:Event_PlayerSay(Handle:event, const String:name[], bool:dontBroadc
 
 
 public OnClientAuthorized(client, const String:auth[]) { // We are hooking this instead of the player_connect event as we want the steamid
+	if(IsFakeClient(client)) return true;
 	new userid = GetClientUserId(client);
 	if (userid <= g_userid) // Ugly hack to get around mass connects on map change
 		return true;
@@ -112,7 +113,7 @@ public Action:Event_PlayerDisconnect(Handle:event, const String:name[], bool:don
 {
 	new userid = GetEventInt(event, "userid");
 	new client = GetClientOfUserId(userid);
-	if (client != 0) {
+	if (client != 0 && !IsFakeClient(client)) {
 		decl String:reason[128], String:playername[MAX_NAME_LENGTH], String:auth[64], String:result[IRC_MAXLEN];
 		GetEventString(event, "reason", reason, sizeof(reason));
 		GetClientName(client, playername, sizeof(playername));
