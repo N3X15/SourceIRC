@@ -85,7 +85,7 @@ public Action:Command_Players(const String:nick[], args) {
 		}
 			
 		for (new j = 1; j <= GetMaxClients(); j++) {
-			if(IsFakeClient(j) || !IsClientInGame(j) || GetClientTeam(j) != i)
+			if(!IsClientInGame(j) || IsFakeClient(j) || GetClientTeam(j) != i)
 				continue;
 				
 			GetClientName(j, sName, sizeof(sName));
