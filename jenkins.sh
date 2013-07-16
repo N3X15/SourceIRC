@@ -4,7 +4,7 @@ SM_MAJOR=1
 SM_MINOR=6
 SM_MASTER_BUILD=`cat /home/gmod/tf2/tf/addons/smbuild.txt`
 SM_BUILD=0
-if [ -d ~/smbuild.txt ] ; then
+if [ -f ~/smbuild.txt ] ; then
 	SM_BUILD=`cat ~/smbuild.txt`
 fi
 
@@ -13,11 +13,12 @@ SM_DROP=/tmp/sourcemod-drop-`whoami`
 PROJECT_DIR="`pwd`"
 
 spcomp(){
-	test -e compiled || mkdir compiled
+	test -e "$PROJECT_DIR/plugins" || mkdir "$PROJECT_DIR/plugins"
 	for fn in $@ ; do
 			out="`basename $fn .sp`.smx"
 			echo " SPCOMP $fn -> $out"
-			./spcomp -i=$SM_HOME/scripting/include -i=$PROJECT_DIR/scripting/include $fn -v0 -o../plugins/$out 1>/dev/null
+			#echo $SM_HOME/scripting/spcomp "-i=$PROJECT_DIR/scripting/include" -v0 "-o=$PROJECT_DIR/plugins/$out" $fn
+			$SM_HOME/scripting/spcomp "-i=$PROJECT_DIR/scripting/include" -v0 "-o=$PROJECT_DIR/plugins/$out" $fn 1> /dev/null
 	done
 }
 
@@ -51,3 +52,6 @@ updateSourceMod
 # Now compile.
 cd "$PROJECT_DIR/scripting"
 spcomp SourceIRC/*.sp
+
+cd "$PROJECT_DIR"
+tar czvf sourceirc.tar.gz configs scripting translations plugins
