@@ -1,6 +1,6 @@
 #!/bin/bash -ex
 # Used by Jenkins.
-SM_HOME=/var/lib/jenkins/sourcemod/sourcemod
+SM_HOME=/var/lib/jenkins/workspace/sourcemod/sourcemod/build/
 #PROJECT_DIR=~/tf2/tf/addons
 PROJECT_DIR="`pwd`"
 
