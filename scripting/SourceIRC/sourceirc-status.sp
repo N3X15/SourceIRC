@@ -103,7 +103,7 @@ public Action:Command_Players(const String:nick[], args) {
 				StrCat(sBuffer, sizeof(sBuffer), ", ");
 			}
 		}	
-		sBuffer[strlen(sBuffer)-2] = '\0';
+		//sBuffer[strlen(sBuffer)-2] = '\0';
 		IRC_ReplyToCommand(nick, "%s (%d): %s", sTeam, GetTeamClientCount(i), sBuffer); // Skip the ', ' from the front
 	}
 	return Plugin_Handled;
