@@ -25,10 +25,10 @@
 
 public Plugin:myinfo = {
 	name = "SourceIRC -> Status",
-	author = "Azelphur",
-	description = "Adds status and gameinfo commands show server status and who's online.",
+	author = "Sazpaimon",
+	description = "Adds player and gameinfo commands that show server status and who's online.",
 	version = IRC_VERSION,
-	url = "http://Azelphur.com/project/sourceirc"
+	url = "http://github.com/N3X15/SourceIRC"
 };
 
 public OnAllPluginsLoaded() {
