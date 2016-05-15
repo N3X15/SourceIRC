@@ -71,7 +71,7 @@ public Action:Event_PlayerSay(Handle:event, const String:name[], bool:dontBroadc
 {
 	new userid = GetEventInt(event, "userid");
 	new client = GetClientOfUserId(userid);
-	
+	if(IsFakeClient(client)) return;
 	decl String:result[IRC_MAXLEN], String:message[256];
 	result[0] = '\0';
 	GetEventString(event, "text", message, sizeof(message));
@@ -96,6 +96,7 @@ public Action:Event_PlayerSay(Handle:event, const String:name[], bool:dontBroadc
 
 public void OnClientAuthorized(client, const String:auth[]) { // We are hooking this instead of the player_connect event as we want the steamid
 	new userid = GetClientUserId(client);
+	if(IsFakeClient(client)) return;
 	if (userid <= g_userid) // Ugly hack to get around mass connects on map change
 		return;
 	g_userid = userid;
@@ -111,7 +112,7 @@ public Action:Event_PlayerDisconnect(Handle:event, const String:name[], bool:don
 {
 	new userid = GetEventInt(event, "userid");
 	new client = GetClientOfUserId(userid);
-	if (client != 0) {
+	if (client != 0 && !IsFakeClient(client)) {
 		decl String:reason[128], String:playername[MAX_NAME_LENGTH], String:auth[64], String:result[IRC_MAXLEN];
 		GetEventString(event, "reason", reason, sizeof(reason));
 		GetClientName(client, playername, sizeof(playername));
@@ -130,7 +131,7 @@ public Action:Event_PlayerChangeName(Handle:event, const String:name[], bool:don
 {
 	new userid = GetEventInt(event, "userid");
 	new client = GetClientOfUserId(userid);
-	if (client != 0) {
+	if (client != 0 && !IsFakeClient(client)) {
 		decl String:oldname[128], String:newname[MAX_NAME_LENGTH], String:auth[64], String:result[IRC_MAXLEN];
 		GetEventString(event, "oldname", oldname, sizeof(oldname));
 		GetEventString(event, "newname", newname, sizeof(newname));
