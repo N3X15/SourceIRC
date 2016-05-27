@@ -71,7 +71,7 @@ public Action:Event_PlayerSay(Handle:event, const String:name[], bool:dontBroadc
 {
 	new userid = GetEventInt(event, "userid");
 	new client = GetClientOfUserId(userid);
-	if(client == 0 || IsFakeClient(client)) return;
+	if(client != 0 && IsFakeClient(client)) return;
 	decl String:result[IRC_MAXLEN], String:message[256];
 	result[0] = '\0';
 	GetEventString(event, "text", message, sizeof(message));
