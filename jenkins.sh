@@ -18,4 +18,4 @@ cd "$PROJECT_DIR/scripting"
 spcomp SourceIRC/*.sp
 
 cd "$PROJECT_DIR"
-tar czvf sourceirc.tar.gz configs scripting translations plugins
+tar czvf sourceirc.tar.gz configs scripting languages plugins
