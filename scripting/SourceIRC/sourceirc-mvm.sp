@@ -60,7 +60,7 @@ public OnLibraryAdded(const String:name[]) {
 
 IRC_Loaded() {
 	IRC_CleanUp(); // Call IRC_CleanUp as this function can be called more than once.
-	IRC_HookEvent("PRIVMSG", Event_PRIVMSG);
+	//IRC_HookEvent("PRIVMSG", Event_PRIVMSG);
 }
 
 public Action Event_WaveStart(Handle event, const char[] name, bool dontBroadcast)
